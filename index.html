@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serenity — Mental Health Platform</title>
+
+  <!-- Stylesheets (order matters) -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ============================================================
+     TOAST CONTAINER
+     ============================================================ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="mainNav">
+  <div class="logo" onclick="goHome()">
+    <span class="logo-dot"></span> Serenity
+  </div>
+
+  <!-- Landing nav links -->
+  <ul class="nav-links" id="landingNav">
+    <li><a onclick="scrollToSection('features')">Features</a></li>
+    <li><a onclick="scrollToSection('matching')">Therapists</a></li>
+    <li><a onclick="scrollToSection('tools')">Tools</a></li>
+    <li><a onclick="openAuth()" class="nav-cta">Get Started</a></li>
+  </ul>
+
+  <!-- Logged-in user info -->
+  <div class="nav-user" id="appNav" style="display:none;">
+    <div class="nav-avatar" id="navAvatar">?</div>
+    <span class="nav-username" id="navUsername"></span>
+    <button class="btn-small btn-small-secondary" onclick="logout()" style="margin-left:0.5rem">
+      Sign out
+    </button>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     LANDING VIEW
+     ============================================================ -->
+<div id="landing-view">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-circle hero-bg-circle-1"></div>
+    <div class="hero-bg-circle hero-bg-circle-2"></div>
+
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        HIPAA Compliant · End-to-End Encrypted
+      </div>
+
+      <h1>Mental wellness, <em>wherever<br>you are</em></h1>
+
+      <p class="hero-sub">
+        Connect with licensed therapists via secure video, track your mood,
+        journal your thoughts, and find community — all in one private platform.
+      </p>
+
+      <div class="hero-actions">
+        <a onclick="openAuth()" class="btn-primary">Find a Therapist <span>→</span></a>
+        <a onclick="scrollToSection('features')" class="btn-secondary">▶ See how it works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div><div class="stat-num">12k+</div><div class="stat-label">Active Users</div></div>
+        <div><div class="stat-num">340+</div><div class="stat-label">Licensed Therapists</div></div>
+        <div><div class="stat-num">98%</div><div class="stat-label">Match Satisfaction</div></div>
+      </div>
+    </div>
+
+    <!-- Dashboard preview (decorative) -->
+    <div class="hero-right">
+      <div class="dashboard-preview">
+        <div class="dp-header">
+          <span class="dp-title">Your Dashboard</span>
+          <div class="dp-dots">
+            <div class="dp-dot" style="background:#ff6b6b"></div>
+            <div class="dp-dot" style="background:#ffd93d"></div>
+            <div class="dp-dot" style="background:#6bcb77"></div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-top">
+            <div class="therapist-avatar">AK</div>
+            <div class="session-info-text">
+              <div class="therapist-name">Dr. Amara Khan</div>
+              <div class="session-type">Cognitive Behavioral Therapy</div>
+            </div>
+            <div class="session-badge"><span class="live-dot"></span> Live</div>
+          </div>
+          <div class="session-time">Today, 3:00 PM</div>
+          <div class="session-actions">
+            <button class="sa-btn sa-btn-join"        onclick="openAuth()">Join Session</button>
+            <button class="sa-btn sa-btn-reschedule">Reschedule</button>
+          </div>
+        </div>
+
+        <div class="mood-tracker">
+          <div class="mt-label">Today's Mood</div>
+          <div class="mood-dots">
+            <div class="mood-dot" title="Very sad">😔</div>
+            <div class="mood-dot" title="Sad">😕</div>
+            <div class="mood-dot active" title="Neutral">😐</div>
+            <div class="mood-dot" title="Good">🙂</div>
+            <div class="mood-dot" title="Great">😊</div>
+            <div class="mood-line"></div>
+          </div>
+        </div>
+
+        <div class="quick-stats">
+          <div class="qs-item"><div class="qs-num">8</div><div class="qs-label">Sessions</div></div>
+          <div class="qs-item"><div class="qs-num">14</div><div class="qs-label">Journal Days</div></div>
+          <div class="qs-item"><div class="qs-num">↑12%</div><div class="qs-label">Mood Trend</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-text"><strong>HIPAA Compliant</strong>Your data is protected</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔐</div>
+      <div class="trust-text"><strong>E2E Encrypted</strong>All sessions secured</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡️</div>
+      <div class="trust-text"><strong>Anonymous Mode</strong>Stay private always</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">⚡</div>
+      <div class="trust-text"><strong>24/7 Crisis Support</strong>Always here for you</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🏥</div>
+      <div class="trust-text"><strong>Licensed Therapists</strong>Verified credentials</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-eyebrow">Platform Features</div>
+    <div class="section-title">Everything you need for <em>meaningful</em> mental healthcare</div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="fc-icon">📹</div>
+        <div class="fc-title">Secure Video & Audio Sessions</div>
+        <div class="fc-desc">End-to-end encrypted one-on-one or group therapy sessions with HIPAA compliance.</div>
+        <span class="fc-tag">HIPAA · E2E Encrypted</span>
+      </div>
+      <div class="feature-card reveal">
+        <div class="fc-icon">🤖</div>
+        <div class="fc-title">AI Therapist Matching</div>
+        <div class="fc-desc">Matched to licensed therapists based on your symptoms, assessment, and preferences.</div>
+        <span class="fc-tag">AI Powered · Anonymous</span>
+      </div>
+      <div class="feature-card reveal">
+        <div class="fc-icon">📅</div>
+        <div class="fc-title">Smart Scheduling</div>
+        <div class="fc-desc">Appointment scheduling with reminders and cross-device calendar sync.</div>
+        <span class="fc-tag">Cross-Device Sync</span>
+      </div>
+      <div class="feature-card reveal">
+        <div class="fc-icon">💬</div>
+        <div class="fc-title">Between-Session Support</div>
+        <div class="fc-desc">In-app chat, guided journaling, daily mood tracking, and curated resource libraries.</div>
+        <span class="fc-tag">Chat · Journal · Mood</span>
+      </div>
+      <div class="feature-card reveal">
+        <div class="fc-icon">🌐</div>
+        <div class="fc-title">Moderated Community</div>
+        <div class="fc-desc">Safe community forums with trained moderation and instant crisis alert escalation.</div>
+        <span class="fc-tag">Moderated · Crisis Alerts</span>
+      </div>
+      <div class="feature-card reveal">
+        <div class="fc-icon">💊</div>
+        <div class="fc-title">Therapist Tools</div>
+        <div class="fc-desc">Integrated payment processing, e-prescription capabilities, and progress notes.</div>
+        <span class="fc-tag">E-Prescriptions · Billing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THERAPIST MATCHING -->
+  <section class="matching" id="matching">
+    <div class="matching-visual reveal">
+      <div class="matching-card">
+        <div class="mc-header">
+          <div class="mc-avatar" style="background:linear-gradient(135deg,#7a9e87,#4a6b56)">SR</div>
+          <div>
+            <div class="mc-name">Dr. Sofia Reyes</div>
+            <div class="mc-spec">Trauma & Anxiety Specialist · 9 yrs exp.</div>
+          </div>
+          <div class="mc-rating">⭐ 4.9</div>
+        </div>
+        <div class="match-score">
+          <div>
+            <div class="ms-label">AI Match Score</div>
+            <div class="ms-value">94%</div>
+            <div class="ms-sub">Based on your assessment</div>
+          </div>
+          <div style="font-size:2.5rem;opacity:0.6">🎯</div>
+        </div>
+        <div class="match-tags">
+          <span class="mtag">Anxiety</span>
+          <span class="mtag">PTSD</span>
+          <span class="mtag">CBT</span>
+          <span class="mtag">Mindfulness</span>
+          <span class="mtag">Group Therapy</span>
+        </div>
+        <div class="mc-avail">
+          <span class="avail-dot"></span> Available tomorrow from 9am · Next 3 slots open
+        </div>
+      </div>
+
+      <div class="float-card float-card-1">
+        <span class="fc-mini-icon">🔒</span>
+        <div>
+          <div class="fc-mini-val">Anonymous Mode</div>
+          <div class="fc-mini-text">No identity required</div>
+        </div>
+      </div>
+      <div class="float-card float-card-2">
+        <span class="fc-mini-icon">✅</span>
+        <div>
+          <div class="fc-mini-val">Verified License</div>
+          <div class="fc-mini-text">State board checked</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matching-text reveal">
+      <div class="section-eyebrow" style="color:var(--sage-dark)">AI-Powered Matching</div>
+      <div class="section-title" style="color:var(--deep);max-width:100%">
+        Find your <em>perfect</em><br>therapist match
+      </div>
+      <p>Our AI analyzes your intake assessment, specific symptoms, therapy style preferences, and scheduling needs.</p>
+      <p>Choose anonymous sessions at any time — your identity is never required to begin your journey.</p>
+      <div class="feature-list">
+        <div class="fl-item"><div class="fl-icon">✦</div>Assessment-driven algorithm with symptom analysis</div>
+        <div class="fl-item"><div class="fl-icon">✦</div>Filter by specialty, therapy type, language & availability</div>
+        <div class="fl-item"><div class="fl-icon">✦</div>Full anonymous session support — no identity needed</div>
+        <div class="fl-item"><div class="fl-icon">✦</div>Switch therapists anytime with no friction</div>
+      </div>
+      <a onclick="openAssessment()" class="btn-primary" style="margin-top:2rem;display:inline-flex;cursor:pointer">
+        Take the Assessment →
+      </a>
+    </div>
+  </section>
+
+  <!-- TOOLS & COMMUNITY -->
+  <section class="tools" id="tools">
+    <div class="tools-header reveal">
+      <div class="section-eyebrow" style="color:var(--sage-dark)">Between Sessions</div>
+      <div class="section-title" style="color:var(--deep)">Your daily <em>wellness</em> toolkit</div>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card tall reveal">
+        <div class="tc-label">Journaling</div>
+        <div class="tc-title">Guided Journal & Reflection Prompts</div>
+        <div class="tc-desc">Daily prompts, free-form journaling, and CBT-inspired exercises to process emotions.</div>
+        <div class="journal-lines">
+          <div class="jl"></div><div class="jl"></div><div class="jl"></div>
+          <div class="jl"></div><div class="jl"></div>
+        </div>
+        <a onclick="openAuth()" class="btn-primary"
+           style="margin-top:1.5rem;display:inline-flex;font-size:0.8rem;padding:0.7rem 1.5rem;cursor:pointer">
+          Start Writing →
+        </a>
+      </div>
+
+      <div class="tool-card reveal">
+        <div class="tc-label">Mood Tracking</div>
+        <div class="tc-title">Daily Check-ins</div>
+        <div class="tc-desc">Log your mood and share trends with your therapist.</div>
+        <div class="mood-chart">
+          <div class="mc-bar" style="height:40%"></div>
+          <div class="mc-bar" style="height:55%"></div>
+          <div class="mc-bar" style="height:35%"></div>
+          <div class="mc-bar" style="height:70%"></div>
+          <div class="mc-bar active" style="height:85%"></div>
+          <div class="mc-bar" style="height:60%"></div>
+          <div class="mc-bar" style="height:75%"></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal">
+        <div class="tc-label">Community</div>
+        <div class="tc-title">Moderated Forums</div>
+        <div class="tc-desc">Safe peer support with trigger warnings and crisis escalation.</div>
+        <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.4rem;">
+          <div style="background:var(--warm);border-radius:8px;padding:0.5rem 0.7rem;font-size:0.7rem;color:var(--text-muted);">💬 Anxiety Support Group · 234 members</div>
+          <div style="background:var(--warm);border-radius:8px;padding:0.5rem 0.7rem;font-size:0.7rem;color:var(--text-muted);">💬 Grief & Loss · 89 members</div>
+          <div style="background:var(--warm);border-radius:8px;padding:0.5rem 0.7rem;font-size:0.7rem;color:var(--text-muted);">💬 Daily Check-in · 1.2k members</div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal">
+        <div class="tc-label">Resources</div>
+        <div class="tc-title">Curated Library</div>
+        <div class="tc-desc">Guided meditations, coping exercises, and educational articles recommended by your therapist.</div>
+      </div>
+
+      <div class="tool-card reveal"
+           style="background:linear-gradient(135deg,rgba(196,131,106,0.08),rgba(232,184,158,0.15));border-color:rgba(196,131,106,0.2)">
+        <div class="tc-label" style="color:var(--clay)">Crisis Support</div>
+        <div class="tc-title">24/7 Instant Help</div>
+        <div class="tc-desc">Immediate escalation to crisis counselors with one tap.</div>
+        <a onclick="openCrisis()" class="btn-primary"
+           style="margin-top:1rem;background:var(--clay);display:inline-flex;font-size:0.75rem;padding:0.6rem 1.2rem;cursor:pointer">
+          Get Help Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-title">Start your <em>healing journey</em><br>today</div>
+    <p>Join thousands finding clarity, support, and growth — from wherever you are.</p>
+    <div class="cta-actions">
+      <a onclick="openAssessment()" class="btn-sage" style="cursor:pointer">Find My Therapist</a>
+      <a onclick="scrollToSection('features')" class="btn-ghost" style="cursor:pointer">Learn More</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo" style="color:var(--warm)"><span class="logo-dot"></span> Serenity</div>
+    <ul class="footer-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">HIPAA Notice</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">For Therapists</a></li>
+      <li><a href="#">Crisis Resources</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Serenity Health, Inc.</div>
+  </footer>
+
+</div><!-- /#landing-view -->
+
+
+<!-- ============================================================
+     APP VIEW  (shown after login)
+     ============================================================ -->
+<div id="app-view">
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <ul class="sidebar-nav">
+          <li><a onclick="showPage('dashboard')"    id="nav-dashboard"    class="active"><span class="nav-icon">🏠</span>Dashboard</a></li>
+          <li><a onclick="showPage('therapists')"   id="nav-therapists"              ><span class="nav-icon">👩‍⚕️</span>Find Therapist</a></li>
+          <li><a onclick="showPage('appointments')" id="nav-appointments"            ><span class="nav-icon">📅</span>Appointments</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Wellness</div>
+        <ul class="sidebar-nav">
+          <li><a onclick="showPage('mood')"    id="nav-mood"   ><span class="nav-icon">🌿</span>Mood Tracker</a></li>
+          <li><a onclick="showPage('journal')" id="nav-journal"><span class="nav-icon">📝</span>Journal</a></li>
+          <li><a onclick="showPage('chat')"    id="nav-chat"   ><span class="nav-icon">🤖</span>AI Support Chat</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Community</div>
+        <ul class="sidebar-nav">
+          <li><a onclick="showPage('community')" id="nav-community"><span class="nav-icon">🌐</span>Community</a></li>
+          <li><a onclick="showPage('resources')" id="nav-resources"><span class="nav-icon">📚</span>Resources</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- ── DASHBOARD ────────────────────────────────────── -->
+      <div class="page-section active" id="page-dashboard">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title" id="dashGreeting">Good morning</div>
+            <div class="page-subtitle">Here's your wellness overview</div>
+          </div>
+          <button class="btn-small btn-small-primary" onclick="showPage('mood')">Log Today's Mood</button>
+        </div>
+
+        <div class="crisis-banner">
+          <span style="font-size:1.5rem">🆘</span>
+          <div class="crisis-banner-text">
+            <strong>Feeling overwhelmed?</strong>
+            Crisis counselors are available 24/7. You don't have to face this alone.
+          </div>
+          <button class="crisis-btn" onclick="openCrisis()">Get Help Now</button>
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card-num" id="dashSessions">0</div>
+            <div class="dash-card-label">Total Sessions</div>
+            <div class="dash-card-trend">📅 Schedule next →</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-num" id="dashJournalDays">0</div>
+            <div class="dash-card-label">Journal Entries</div>
+            <div class="dash-card-trend">✍️ Write today →</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-num" id="dashMoodTrend">—</div>
+            <div class="dash-card-label">Mood This Week</div>
+            <div class="dash-card-trend">🌿 Track now →</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;">
+          <div class="dash-card">
+            <div style="font-size:0.8rem;font-weight:500;color:var(--text-muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.06em;">
+              Upcoming Appointments
+            </div>
+            <div id="dashUpcomingAppts"></div>
+          </div>
+          <div class="dash-card">
+            <div style="font-size:0.8rem;font-weight:500;color:var(--text-muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.06em;">
+              Recent Mood
+            </div>
+            <div class="mood-chart" id="dashMoodChart"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MOOD TRACKER ──────────────────────────────────── -->
+      <div class="page-section" id="page-mood">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Mood Tracker</div>
+            <div class="page-subtitle">Log your daily emotional state</div>
+          </div>
+        </div>
+
+        <div class="mood-grid">
+          <div>
+            <div class="dash-card" style="margin-bottom:1.5rem;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--deep);margin-bottom:1.2rem;">
+                How are you feeling today?
+              </div>
+              <div class="mood-select-row" id="moodSelectRow">
+                <div class="mood-btn" data-val="1" onclick="selectMood(1)" title="Terrible">😔</div>
+                <div class="mood-btn" data-val="2" onclick="selectMood(2)" title="Bad">😕</div>
+                <div class="mood-btn" data-val="3" onclick="selectMood(3)" title="Neutral">😐</div>
+                <div class="mood-btn" data-val="4" onclick="selectMood(4)" title="Good">🙂</div>
+                <div class="mood-btn" data-val="5" onclick="selectMood(5)" title="Great">😊</div>
+              </div>
+              <div class="form-group" style="margin-top:1.2rem;">
+                <label class="form-label">Add a note (optional)</label>
+                <input type="text" class="form-input" id="moodNote" placeholder="What's influencing your mood today?">
+              </div>
+              <button class="form-submit" onclick="saveMood()" style="margin-top:0.8rem;">Save Mood Entry</button>
+            </div>
+          </div>
+          <div>
+            <div class="dash-card">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--deep);margin-bottom:0.5rem;">
+                7-Day Trend
+              </div>
+              <div class="mood-chart-big" id="moodBigChart"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-card" style="margin-top:1.5rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--deep);margin-bottom:1rem;">
+            Mood History
+          </div>
+          <div class="mood-history" id="moodHistory"></div>
+        </div>
+      </div>
+
+      <!-- ── JOURNAL ───────────────────────────────────────── -->
+      <div class="page-section" id="page-journal">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Journal</div>
+            <div class="page-subtitle">Your private space for reflection</div>
+          </div>
+          <button class="btn-small btn-small-primary" onclick="newJournalEntry()">+ New Entry</button>
+        </div>
+
+        <div class="journal-grid">
+          <div class="journal-list">
+            <div class="journal-list-header">
+              <span>Entries</span>
+              <span id="journalCount">0</span>
+            </div>
+            <div id="journalListItems"></div>
+          </div>
+
+          <div class="journal-editor" id="journalEditorPanel">
+            <div id="journalEditorEmpty" class="empty-state" style="padding:2rem 1rem;">
+              <div class="empty-state-icon">📝</div>
+              <div class="empty-state-title">Start writing</div>
+              <div class="empty-state-sub">Select an entry or create a new one</div>
+              <button class="btn-small btn-small-primary" onclick="newJournalEntry()">New Entry</button>
+            </div>
+            <div id="journalEditorForm" style="display:none;height:100%;">
+              <input type="hidden" id="editingEntryId">
+              <input type="text"   class="journal-editor-title" id="journalTitle"    placeholder="Entry title…">
+              <div id="journalEntryDate"
+                   style="font-size:0.72rem;color:var(--text-muted);padding-bottom:0.5rem;border-bottom:1px solid var(--border);"></div>
+              <textarea class="journal-editor-body" id="journalBody"
+                        placeholder="Write freely… This space is yours alone."></textarea>
+              <div class="journal-actions">
+                <button class="btn-small btn-small-primary"   onclick="saveJournalEntry()">Save</button>
+                <button class="btn-small btn-small-secondary" onclick="cancelJournalEdit()">Cancel</button>
+                <button class="btn-small btn-small-danger"    onclick="deleteJournalEntry()"
+                        id="journalDeleteBtn" style="display:none">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FIND A THERAPIST ──────────────────────────────── -->
+      <div class="page-section" id="page-therapists">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Find a Therapist</div>
+            <div class="page-subtitle">Matched to your needs</div>
+          </div>
+          <button class="btn-small btn-small-primary" onclick="openAssessment()">Take Assessment</button>
+        </div>
+
+        <div class="filter-row" id="therapistFilters">
+          <button class="filter-chip active"      onclick="filterTherapists('all',this)">All</button>
+          <button class="filter-chip"             onclick="filterTherapists('anxiety',this)">Anxiety</button>
+          <button class="filter-chip"             onclick="filterTherapists('depression',this)">Depression</button>
+          <button class="filter-chip"             onclick="filterTherapists('trauma',this)">Trauma & PTSD</button>
+          <button class="filter-chip"             onclick="filterTherapists('relationships',this)">Relationships</button>
+          <button class="filter-chip"             onclick="filterTherapists('cbt',this)">CBT</button>
+        </div>
+        <div class="therapist-grid" id="therapistGrid"></div>
+      </div>
+
+      <!-- ── APPOINTMENTS ──────────────────────────────────── -->
+      <div class="page-section" id="page-appointments">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Appointments</div>
+            <div class="page-subtitle">Your therapy schedule</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:0.8rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8rem;">
+            Upcoming
+          </div>
+          <div class="appt-list" id="upcomingAppts"></div>
+        </div>
+
+        <div>
+          <div style="font-size:0.8rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8rem;">
+            Past Sessions
+          </div>
+          <div class="appt-list" id="pastAppts"></div>
+        </div>
+      </div>
+
+      <!-- ── AI SUPPORT CHAT ───────────────────────────────── -->
+      <div class="page-section" id="page-chat">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">AI Support Chat</div>
+            <div class="page-subtitle">A safe space to talk — powered by AI, not a replacement for therapy</div>
+          </div>
+          <button class="btn-small btn-small-secondary" onclick="clearChat()">Clear Chat</button>
+        </div>
+
+        <div class="crisis-banner" style="margin-bottom:1rem;">
+          <span style="font-size:1.3rem">ℹ️</span>
+          <div class="crisis-banner-text" style="font-size:0.8rem;">
+            <strong>This is an AI, not a licensed therapist.</strong>
+            For crisis support, please call 988 (Suicide & Crisis Lifeline) or text HOME to 741741.
+          </div>
+          <button class="crisis-btn" onclick="openCrisis()">Crisis Help</button>
+        </div>
+
+        <div class="chat-layout">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-row">
+            <input  type="text" class="chat-input" id="chatInput"
+                    placeholder="Share what's on your mind…">
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">Send →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── COMMUNITY ─────────────────────────────────────── -->
+      <div class="page-section" id="page-community">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Community</div>
+            <div class="page-subtitle">Peer support in a safe, moderated space</div>
+          </div>
+          <button class="btn-small btn-small-primary" onclick="openNewPost()">+ New Post</button>
+        </div>
+
+        <div class="filter-row">
+          <button class="filter-chip active" onclick="filterPosts('all',this)">All</button>
+          <button class="filter-chip"        onclick="filterPosts('anxiety',this)">Anxiety</button>
+          <button class="filter-chip"        onclick="filterPosts('depression',this)">Depression</button>
+          <button class="filter-chip"        onclick="filterPosts('grief',this)">Grief</button>
+          <button class="filter-chip"        onclick="filterPosts('checkin',this)">Daily Check-in</button>
+        </div>
+        <div class="forum-list" id="forumList"></div>
+      </div>
+
+      <!-- ── RESOURCES ─────────────────────────────────────── -->
+      <div class="page-section" id="page-resources">
+        <div class="page-header-row">
+          <div class="page-header">
+            <div class="page-title">Resource Library</div>
+            <div class="page-subtitle">Curated content for your wellbeing</div>
+          </div>
+        </div>
+        <div class="filter-row">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">Meditation</button>
+          <button class="filter-chip">CBT Exercises</button>
+          <button class="filter-chip">Articles</button>
+          <button class="filter-chip">Videos</button>
+        </div>
+        <div class="resource-grid" id="resourceGrid"></div>
+      </div>
+
+    </main>
+  </div>
+</div><!-- /#app-view -->
+
+
+<!-- ============================================================
+     MODALS
+     ============================================================ -->
+
+<!-- AUTH -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    <div class="modal-header">
+      <div class="modal-eyebrow">Welcome to Serenity</div>
+      <div class="modal-title">Your journey<br>begins here</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login',this)">Sign In</button>
+      <button class="auth-tab"        onclick="switchAuthTab('register',this)">Create Account</button>
+    </div>
+    <div id="auth-login">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="loginPassword" placeholder="Your password">
+      </div>
+      <div class="form-error" id="loginError"></div>
+      <button class="form-submit" onclick="login()">Sign In</button>
+      <div class="form-divider"><span>or try a demo</span></div>
+      <button class="form-submit" style="background:var(--sage);" onclick="demoLogin()">
+        Continue as Guest (Demo)
+      </button>
+    </div>
+    <div id="auth-register" style="display:none">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" id="regFirst" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" id="regLast" placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="regEmail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="regPassword" placeholder="Minimum 6 characters">
+      </div>
+      <div class="form-error" id="registerError"></div>
+      <button class="form-submit" onclick="register()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ASSESSMENT -->
+<div class="modal-overlay" id="assessmentModal">
+  <div class="modal modal-wide" style="position:relative">
+    <button class="modal-close" onclick="closeModal('assessmentModal')">✕</button>
+    <div class="modal-header">
+      <div class="modal-eyebrow">AI Matching Assessment</div>
+      <div class="modal-title">Let's find your<br>ideal therapist</div>
+    </div>
+    <div class="assessment-progress" id="assessProgress"></div>
+    <div id="assessmentSteps"></div>
+    <div class="assessment-nav">
+      <button class="btn-small btn-small-secondary" id="assessBackBtn" onclick="assessBack()">← Back</button>
+      <button class="btn-small btn-small-primary"   id="assessNextBtn" onclick="assessNext()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal modal-wide" style="position:relative">
+    <button class="modal-close" onclick="closeModal('bookingModal')">✕</button>
+    <div class="modal-header">
+      <div class="modal-eyebrow">Schedule a Session</div>
+      <div class="modal-title" id="bookingTherapistName">Book with Dr. —</div>
+    </div>
+    <input type="hidden" id="bookingTherapistId">
+    <div style="font-size:0.85rem;font-weight:500;color:var(--text-muted);margin-bottom:0.5rem;">Select a date</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:0.5rem;" id="calHeaders"></div>
+    <div class="booking-calendar" id="bookingCalendar"></div>
+    <div style="font-size:0.85rem;font-weight:500;color:var(--text-muted);margin:1rem 0 0.5rem;">Select a time</div>
+    <div class="time-slots" id="timeSlots"></div>
+    <div class="form-group" style="margin-top:1.2rem;">
+      <label class="form-label">Session type</label>
+      <select class="form-input" id="sessionType">
+        <option value="Video Call">Video Call</option>
+        <option value="Audio Only">Audio Only</option>
+        <option value="In-Person">In-Person</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes for therapist (optional)</label>
+      <textarea class="form-input form-textarea" id="bookingNotes"
+                placeholder="Anything you'd like your therapist to know…"
+                style="min-height:70px"></textarea>
+    </div>
+    <button class="form-submit" onclick="confirmBooking()">Confirm Appointment</button>
+  </div>
+</div>
+
+<!-- CRISIS -->
+<div class="modal-overlay" id="crisisModal">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('crisisModal')">✕</button>
+    <div style="text-align:center;padding:1rem 0;">
+      <div style="font-size:3rem;margin-bottom:1rem;">🆘</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--deep);margin-bottom:1rem;">
+        You are not alone
+      </div>
+      <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:2rem;">
+        If you're in crisis, please reach out to one of these resources immediately. Help is available 24/7.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem;">
+        <a href="tel:988" style="display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;background:rgba(196,131,106,0.08);border:1px solid rgba(196,131,106,0.2);border-radius:14px;text-decoration:none;color:var(--text);">
+          <span style="font-size:1.5rem">📞</span>
+          <div>
+            <strong style="display:block;font-size:0.9rem;color:var(--deep)">Call 988</strong>
+            <span style="font-size:0.78rem;color:var(--text-muted)">Suicide & Crisis Lifeline — Free, 24/7</span>
+          </div>
+        </a>
+        <div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;background:rgba(122,158,135,0.08);border:1px solid rgba(122,158,135,0.2);border-radius:14px;">
+          <span style="font-size:1.5rem">💬</span>
+          <div>
+            <strong style="display:block;font-size:0.9rem;color:var(--deep)">Text HOME to 741741</strong>
+            <span style="font-size:0.78rem;color:var(--text-muted)">Crisis Text Line — Available now</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;background:rgba(122,158,135,0.08);border:1px solid rgba(122,158,135,0.2);border-radius:14px;">
+          <span style="font-size:1.5rem">🚨</span>
+          <div>
+            <strong style="display:block;font-size:0.9rem;color:var(--deep)">Call 911</strong>
+            <span style="font-size:0.78rem;color:var(--text-muted)">For immediate danger — Emergency services</span>
+          </div>
+        </div>
+      </div>
+      <button class="form-submit" onclick="closeModal('crisisModal')" style="background:var(--sage-dark)">
+        I'm safe, close this
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NEW POST -->
+<div class="modal-overlay" id="newPostModal">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('newPostModal')">✕</button>
+    <div class="modal-header">
+      <div class="modal-eyebrow">Community</div>
+      <div class="modal-title">Share with the community</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select class="form-input" id="postCategory">
+        <option value="checkin">Daily Check-in</option>
+        <option value="anxiety">Anxiety</option>
+        <option value="depression">Depression</option>
+        <option value="grief">Grief</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="postTitle" placeholder="What's on your mind?">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Message</label>
+      <textarea class="form-input form-textarea" id="postBody"
+                placeholder="Share your thoughts, ask for support, or offer encouragement…"></textarea>
+    </div>
+    <button class="form-submit" onclick="submitPost()">Post Anonymously</button>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT (load order matters)
+     ============================================================ -->
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/mood.js"></script>
+<script src="js/journal.js"></script>
+<script src="js/therapists.js"></script>
+<script src="js/appointments.js"></script>
+<script src="js/assessment.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/community.js"></script>
+
+<script>
+  // Auto-restore session on page load
+  if (currentUser) enterApp();
+</script>
+
+</body>
+</html>
