@@ -1,0 +1,50 @@
+/* ============================================================
+   SERENITY — Responsive / Media Queries
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  /* Nav */
+  nav               { padding: 1rem 1.5rem; }
+  .nav-links        { display: none; }
+
+  /* Hero */
+  .hero             { grid-template-columns: 1fr; }
+  .hero-right       { display: none; }
+  .hero-left        { padding: 3rem 1.5rem; }
+
+  /* Landing sections */
+  .features         { padding: 4rem 1.5rem; }
+  .features-grid    { grid-template-columns: 1fr; }
+  .matching         { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .tools            { padding: 4rem 1.5rem; }
+  .tools-grid       { grid-template-columns: 1fr; }
+  .cta              { padding: 5rem 1.5rem; }
+  footer            { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  .trust            { gap: 1.5rem; padding: 2rem 1.5rem; }
+
+  /* App layout */
+  .app-layout       { grid-template-columns: 1fr; }
+  .sidebar          { display: none; }
+  .main-content     { margin-left: 0; padding: 1rem; }
+
+  /* App pages */
+  .dash-grid        { grid-template-columns: 1fr 1fr; }
+  .mood-grid        { grid-template-columns: 1fr; }
+  .journal-grid     { grid-template-columns: 1fr; }
+  .therapist-grid   { grid-template-columns: 1fr; }
+  .resource-grid    { grid-template-columns: 1fr 1fr; }
+
+  /* Chat */
+  .chat-layout      { height: calc(100vh - 200px); }
+}
+
+@media (max-width: 600px) {
+  .dash-grid        { grid-template-columns: 1fr; }
+  .resource-grid    { grid-template-columns: 1fr; }
+  .time-slots       { grid-template-columns: repeat(2, 1fr); }
+  .cta-actions      { flex-direction: column; align-items: center; }
+  .hero-stats       { gap: 1.5rem; }
+  .appt-card        { flex-wrap: wrap; }
+  .appt-actions     { width: 100%; }
+}
